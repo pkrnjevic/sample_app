@@ -7,12 +7,14 @@ gem 'rails', '3.2.1'
 
 gem 'sqlite3'
 
-group :development do
+# Setup rspec, guard, spork, livereload and footnotes
+group :development, :test do
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'rspec-rails'
-end
-
-group :test do
-  gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'guard-livereload'
+  gem 'rails-footnotes'
   gem 'webrat'
 end
 
