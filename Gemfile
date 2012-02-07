@@ -9,13 +9,15 @@ gem 'sqlite3'
 
 # Setup rspec, guard, spork, livereload and footnotes
 group :development, :test do
-  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'rb-fsevent', '0.4.3.1', :require => false
+#  gem 'growl'
   gem 'rspec-rails'
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'guard-livereload'
   gem 'rails-footnotes'
-  gem 'webrat'
+  gem 'capybara'
+  gem 'annotate', '~> 2.4.1.beta'
 end
 
 # Gems used only for assets and not required
@@ -23,11 +25,11 @@ end
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
+  gem 'uglifier', '>= 1.0.3'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
 
-  gem 'uglifier', '>= 1.0.3'
 end
 
 gem 'jquery-rails'
