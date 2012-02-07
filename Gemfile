@@ -9,7 +9,7 @@ gem 'sqlite3'
 
 # Setup rspec, guard, spork, livereload and footnotes
 group :development, :test do
-  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'rb-fsevent', :require => false # if RUBY_PLATFORM =~ /darwin/i
 #  gem 'growl'
   gem 'rspec-rails'
   gem 'guard-rspec'
