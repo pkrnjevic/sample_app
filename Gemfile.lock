@@ -167,7 +167,7 @@ DEPENDENCIES
   jquery-rails
   rails (= 3.2.1)
   rails-footnotes
-  rb-fsevent (= 0.4.3.1)
+  rb-fsevent
   rspec-rails
   sass-rails (~> 3.2.3)
   sqlite3
