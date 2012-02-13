@@ -4,4 +4,8 @@ module ApplicationHelper
   	title = page_title.empty? ? "" : " | #{page_title}"
     "Ruby on Rails Tutorial Sample App" + title
   end
+
+  def logo
+    image_tag("logo.png", alt: "Sample App", class: "round")
+  end
 end

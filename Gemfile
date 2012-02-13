@@ -10,8 +10,9 @@ gem 'sqlite3'
 
 # Setup rspec, guard, spork, livereload and footnotes
 group :development, :test do
-  gem 'rb-fsevent', :require => false # if RUBY_PLATFORM =~ /darwin/i
-#  gem 'growl'
+#  gem 'rb-fsevent', :require => false # if RUBY_PLATFORM =~ /darwin/i
+  gem 'growl'
+  gem 'ruby_gntp'
   gem 'rspec-rails'
   gem 'guard-rspec'
   gem 'guard-spork'
@@ -20,6 +21,8 @@ group :development, :test do
   gem 'capybara'
   gem 'annotate', '~> 2.4.1.beta'
   gem 'factory_girl_rails'
+  gem 'cucumber-rails', '1.2.1'
+  gem 'database_cleaner', '0.7.0'
 end
 
 # Gems used only for assets and not required
