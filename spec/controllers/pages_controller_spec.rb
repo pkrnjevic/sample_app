@@ -13,7 +13,6 @@ describe PagesController do
       page.should have_selector 'title', contents: "Ruby on Rails Tutorial Sample App | Home"
     end
   end
-  
 
   describe "GET 'contact'" do
     it "returns http success" do

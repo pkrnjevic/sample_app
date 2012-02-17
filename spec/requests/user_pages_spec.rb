@@ -15,13 +15,26 @@ describe "User pages" do
     it { should have_selector('title', text: 'All users') }
 
     describe "pagination" do
-      before(:all) { 30.times { FactoryGirl.create(:user) } }
+      before(:all) { 45.times { FactoryGirl.create(:user) } }
       after(:all) { User.delete_all }
+
+#      let(:first_page)  { User.page(1) }
+#      let(:second_page) { User.page(2) }
 
       it { should have_link('Next') }
       it { should have_link('2') }
 
       it { should_not have_link('delete') }
+
+# For some reason, User.page(n) returns all users, not just those for page n.
+#      it "should list the first page of users" do
+#        p "number of users per page =", first_page.count
+#        first_page.each { |user| p user.name; page.should have_selector('li', text: user.name) }
+#      end
+
+#      it "should not list the second page of users" do
+#        second_page.each { |user| page.should_not have_selector('li', text: user.name) }
+#      end
 
       describe "as an admin user" do
         let(:admin) { FactoryGirl.create(:admin) }
@@ -99,6 +112,23 @@ describe "User pages" do
 
 		end
 	end
+
+  describe "destroy" do
+    let(:admin) { FactoryGirl.create(:admin) }
+    before do
+      sign_in(admin)
+    end
+
+    describe "self as admin user" do
+			it "should not be possible" do
+        puts "TODO: have to figure out how to test delete user"
+#        visit_path(users_path(admin), :delete)
+#				expect { click_button "Sign up" }.not_to change(User, :count)
+      end
+    end
+
+
+  end
 
   describe "edit" do
     let(:user) { FactoryGirl.create(:user) }
