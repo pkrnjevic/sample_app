@@ -5,11 +5,12 @@ class UsersController < ApplicationController
   before_filter :admin_user, only: :destroy
 
   def index
-    @users = User.paginate(page: params[:page], per_page: 20)
+    @users = User.paginate(page: params[:page], per_page: 30)
   end
 
   def show
 		@user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
 	end
 
   def new
@@ -42,22 +43,16 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     if (current_user?(user) && current_user.admin?)
       flash[:notice] = "Administrators can't delete themselves."
+      redirect_to user
     else
       name = user.name
       user.destroy
       flash[:success] = "User #{name} destroyed."
+      redirect_to users_path
     end
-    redirect_to users_path
   end
 
   private
-    def signed_in_user
-      unless signed_in?
-        store_location
-        redirect_to signin_path, notice: "Please sign in."
-      end
-    end
-
     def signed_in_cant_signup
       redirect_to root_path, notice: "You already have an account and are signed in" if signed_in?
     end

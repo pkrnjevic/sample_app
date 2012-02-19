@@ -73,7 +73,8 @@ GEM
     factory_girl_rails (1.4.0)
       factory_girl (~> 2.3.0)
       railties (>= 3.0.0)
-    faker (0.3.1)
+    faker (1.0.1)
+      i18n (~> 0.4)
     ffi (1.0.11)
     gherkin (2.7.7)
       json (>= 1.4.6)
@@ -85,10 +86,10 @@ GEM
       em-websocket (>= 0.2.0)
       guard (>= 0.10.0)
       multi_json (~> 1.0.3)
-    guard-rspec (0.6.0)
-      guard (>= 0.10.0)
-    guard-spork (0.5.1)
-      guard (>= 0.10.0)
+    guard-rspec (0.5.5)
+      guard (>= 0.8.4)
+    guard-spork (0.3.2)
+      guard (>= 0.8.4)
       spork (>= 0.8.4)
     hike (1.2.1)
     i18n (0.6.0)
@@ -103,8 +104,8 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.17.2)
     multi_json (1.0.4)
+    mysql2 (0.3.11)
     nokogiri (1.5.0)
-    pg (0.12.2)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.1)
@@ -183,24 +184,24 @@ PLATFORMS
 
 DEPENDENCIES
   annotate (~> 2.4.1.beta)
-  bcrypt-ruby
-  capybara
-  coffee-rails (~> 3.2.1)
+  bcrypt-ruby (= 3.0.1)
+  capybara (= 1.1.2)
+  coffee-rails (~> 3.2.2)
   cucumber-rails (= 1.2.1)
   database_cleaner (= 0.7.0)
-  factory_girl_rails
-  faker
+  factory_girl_rails (= 1.4.0)
+  faker (= 1.0.1)
   growl
   guard-livereload
-  guard-rspec
-  guard-spork
+  guard-rspec (= 0.5.5)
+  guard-spork (= 0.3.2)
   jquery-rails
-  pg
+  mysql2 (= 0.3.11)
   rails (= 3.2.1)
   rails-footnotes
-  rspec-rails
+  rspec-rails (~> 2.8.rc)
   ruby_gntp
-  sass-rails (~> 3.2.3)
-  sqlite3
-  uglifier (>= 1.0.3)
+  sass-rails (~> 3.2.4)
+  sqlite3 (= 1.3.5)
+  uglifier (>= 1.2.3)
   will_paginate (= 3.0.3)

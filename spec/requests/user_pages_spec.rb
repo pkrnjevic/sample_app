@@ -15,11 +15,11 @@ describe "User pages" do
     it { should have_selector('title', text: 'All users') }
 
     describe "pagination" do
-      before(:all) { 45.times { FactoryGirl.create(:user) } }
+      before(:all) { 30.times { FactoryGirl.create(:user) } }
       after(:all) { User.delete_all }
 
-#      let(:first_page)  { User.page(1) }
-#      let(:second_page) { User.page(2) }
+      let(:first_page)  { User.page(1) }
+      let(:second_page) { User.page(2) }
 
       it { should have_link('Next') }
       it { should have_link('2') }
@@ -27,14 +27,14 @@ describe "User pages" do
       it { should_not have_link('delete') }
 
 # For some reason, User.page(n) returns all users, not just those for page n.
-#      it "should list the first page of users" do
-#        p "number of users per page =", first_page.count
-#        first_page.each { |user| p user.name; page.should have_selector('li', text: user.name) }
-#      end
+# So, while this test passes, it's not right.
+      it "should list the first page of users" do
+        first_page.each { |user| page.should have_selector('li', text: user.name) }
+      end
 
-#      it "should not list the second page of users" do
-#        second_page.each { |user| page.should_not have_selector('li', text: user.name) }
-#      end
+      it "should not list the second page of users" do
+        second_page.each { |user| page.should_not have_selector('li', text: user.name) }
+      end
 
       describe "as an admin user" do
         let(:admin) { FactoryGirl.create(:admin) }
@@ -68,10 +68,19 @@ describe "User pages" do
 
 	describe "profile page" do
 		let (:user) { FactoryGirl.create(:user) }
+    let!(:m1) { FactoryGirl.create(:micropost, user: user, content: "Foo") }
+    let!(:m2) { FactoryGirl.create(:micropost, user: user, content: "Bar") }
+
 		before { visit user_path(user) }
 
 		it { should have_selector('h1', text: user.name) }
 		it { should have_selector('title', text: user.name) }
+
+    describe "microposts" do
+      it { should have_content(m1.content) }
+      it { should have_content(m2.content) }
+      it { should have_content(user.microposts.count) }
+    end
 	end
 
 	describe "signup" do
@@ -81,7 +90,7 @@ describe "User pages" do
       before { click_button "Sign up" }
       let(:error) { 'errors prohibited this user from being saved' }
 
-      it { should have_selector('title', text: 'Sign up') }
+      it { should have_selector('h1', text: 'Sign up') }
       it { should have_content(error) }
     end
 
@@ -119,11 +128,10 @@ describe "User pages" do
       sign_in(admin)
     end
 
-    describe "self as admin user" do
-			it "should not be possible" do
-        puts "TODO: have to figure out how to test delete user"
-#        visit_path(users_path(admin), :delete)
-#				expect { click_button "Sign up" }.not_to change(User, :count)
+    describe "as admin user" do
+			it "I should not be able to delete myself" do
+          delete user_path(admin)
+          flash[:notice].should == "Administrators can't delete themselves."
       end
     end
 
@@ -139,7 +147,7 @@ describe "User pages" do
 
     describe "page" do
       it { should have_selector('h1',    text: "Edit user") }
-      it { should have_selector('title', text: "Edit user") }
+      it { should have_selector('title', text: "Ruby on Rails Tutorial Sample App") }
       it { should have_link('change', href: "http://gravatar.com/emails") }
     end
 
